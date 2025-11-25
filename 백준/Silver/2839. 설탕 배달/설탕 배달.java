@@ -1,31 +1,31 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.IOException;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
+        
         int N = Integer.parseInt(br.readLine());
-        int minCount = Integer.MAX_VALUE;
-        boolean found = false;
+        int count = 0;
 
-        for (int i = 0; i <= N / 5; i++) {
-            for (int j = 0; j <= N / 3; j++) {
-                if (5 * i + 3 * j == N) {
-                    minCount = Math.min(minCount, i + j);
-                    found = true;
-                }
+        while (N >= 0) {
+            if (N % 5 == 0) {
+                count += N / 5;
+                bw.write(Integer.toString(count));
+                bw.flush();
+                return;
             }
+            N -= 3;
+            count++;
         }
 
-        if (found) {
-            bw.write(String.valueOf(minCount));
-        } else {
-            bw.write("-1");
-        }
 
-        br.close();
+        bw.write("-1");
         bw.flush();
-        bw.close();
     }
 }
